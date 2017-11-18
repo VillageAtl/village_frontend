@@ -53,7 +53,7 @@ root.addChild(new Node("childB", "Okay, well how are you feeling?"));
 var children = root.getChildren();
 
 // Add possible responses for childA
-children[0].responses = ["Mom", "Dad", "friend"];
+children[0].responses = ["Mom", "Dad", "friend", "other"];
 
 children[0].addChild(new Node("childAA", "Where were you with this person?"));
 
@@ -84,6 +84,9 @@ children[0].addChild(new Node("childAA", "What was it about?"));
 
 $( document ).ready(function() {
 
+    console.log("here we are");
+
+
     // Begin with root
     var currentNode = root;
 
@@ -92,13 +95,13 @@ $( document ).ready(function() {
     }
 
     function updateBot(currentNode) {
-        
+
         console.log("updatebot called");
 
         // Get info from currentNode:
         value = currentNode.getValue();
         responses = currentNode.getResponses();
-        
+
         // Update bot to current statement
         $( "#bot" ).text(value);
 
@@ -111,12 +114,13 @@ $( document ).ready(function() {
     function updateResponses(currentNode) {
 
         // Clear previous response options
-        $( "#responses" ).empty()
+        $( "#responses" ).empty();
 
         // Add a span for each response in responses array
         var responseArrayLength = responses.length;
         for (var i = 0; i < responseArrayLength; i++) {
-            $( "#responses" ).append( "<span>" + responses[i] + "</span>" );
+            $( "#responses" ).append( "<a href='#' id='chatBubbles'><div class='col-sm-4 text-center'><p class='text-primary'>" + responses[i] + "</p></div>" );
+
         }
     }
 
@@ -124,7 +128,7 @@ $( document ).ready(function() {
     updateResponses(currentNode);
 
     function iterate(currentNode) {
-        
+
         children = currentNode.getChildren();
 
         // Traverse to first child if exists
@@ -139,7 +143,7 @@ $( document ).ready(function() {
 
     $( "#responses" ).click(function() {
         children = currentNode.getChildren();
-        currentNode=children[0];
+        currentNode = children[0];
         iterate(currentNode);
     });
 
@@ -174,7 +178,7 @@ $( document ).ready(function() {
 // I’m sorry to hear that. pause
 // Okay, let’s take a break soon. But first, did I get everything? I know that you and person were at location around date and time. And you action about subject. What else should I know?
 // option to type input / select from recent list / speech-to-text / select from pictures
-// Great, thank you for adding that. I think I understand a little better now. Now I want you to (insert mindfulness practice ie guided breather / doodling). 
+// Great, thank you for adding that. I think I understand a little better now. Now I want you to (insert mindfulness practice ie guided breather / doodling).
 // Thank you for taking the time to do that. I hope you feel a little bit better now! Back to what happened. I’m curious about the rest of your day. How were doing before subject happened?
 // Good / bad / fine (new tree for negatives. find out if related)
 // And how are you afterwards? Is it still impacting you?
