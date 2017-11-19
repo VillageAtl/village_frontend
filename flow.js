@@ -84,7 +84,11 @@ children[0].addChild(new Node("What was it about?"));
 
 
 // Create an array to store the contents of our conversation
-var conversationArray = []
+var chatLog = []
+
+function logChat(text) {
+    chatLog.push(text);
+}
 
 // When the document is ready, do this:
 $( document ).ready(function() {
@@ -95,14 +99,15 @@ $( document ).ready(function() {
     // Update the chat bot dialogue to display the next question
     function updateBot(currentNode) {
 
-        console.log("updatebot called");
-
         // Get info from currentNode:
         value = currentNode.getValue();
         responses = currentNode.getResponses();
 
         // Update bot to current statement
         $( "#bot" ).text(value);
+
+        // Update the chat log
+        logChat(value);
 
         return
     }
@@ -137,15 +142,32 @@ $( document ).ready(function() {
             updateResponses(currentNode);
         }
         else {
+            // Print the conversation log
+            var chatLogLength = chatLog.length;
+            var speaker = "";
+
+            // Iterate though chat log array
+            // Indicate who said what
+            for (var i = 0; i < chatLogLength; i++) {
+                if (i%2 == 1){
+                    speaker = "Chat bot: ";
+                } else {
+                    speaker = "User: ";
+                }
+                console.log(speaker + chatLog[i]);
+            }
             return false;
         }
     }
 
     // When user clicks on a response, iterate down in the tree
-    $( "#responses" ).click(function() {
+    $( "#responses" ).click(function(e) {
         children = currentNode.getChildren();
         currentNode = children[0];
         iterate(currentNode);
+
+        var clicked = $(e.target).text();
+        logChat(clicked);
     });
 
 });
