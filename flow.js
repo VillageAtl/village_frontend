@@ -119,7 +119,7 @@ $( document ).ready(function() {
         // Add a span for each response in responses array
         var responseArrayLength = responses.length;
         for (var i = 0; i < responseArrayLength; i++) {
-            $( "#responses" ).append( "<a href='#' id='chatBubbles'><div class='col-sm-4 text-center'><p class='text-white'>" + responses[i] + "</p></div>" );
+            $( "#responses" ).append( "<a href='#' id='chatBubbles'><div class='col-sm-4 text-center'> <p class='text-white coloredBackground'> <br>  " + responses[i] + "  <br> <br> </p> </div>" );
 
         }
     }
