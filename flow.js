@@ -1,7 +1,9 @@
-function Node(name, value) {
+// Define our Node object
+// Node has value, responses array, children, and a parent
+
+function Node(value) {
 
     this.value = value;
-    this.name = name;
     this.responses = [];
     this.children = [];
     this.parent = null;
@@ -34,66 +36,63 @@ function Node(name, value) {
     }
 }
 
-/////////////////////////////////////////////
-// Naming structure: 	root has children childA, childB, childC etc.
-//						childA has children childAA, childAB, childAC etc.
-//						childAA has children childAAA, childAAB, childAAC etc.
+////////////////////////////////// Create question flow
+
 
 // Create root with first question
-var root = new Node("root", "Hi, Jack! What's up? Did something happen?");
+var root = new Node("Hi, Jack! What's up? Did something happen?");
 
 // Add possible responses
 root.responses = ["yes", "no"];
 
 // Add two responses, one for each response
-root.addChild(new Node("childA", "Did it involve another person?"));
-root.addChild(new Node("childB", "Okay, well how are you feeling?"));
+root.addChild(new Node("Did it involve another person?"));
+root.addChild(new Node("Okay, well how are you feeling?"));
 
 // Get all children of root as a list
 var children = root.getChildren();
 
-// Add possible responses for childA
+// Add possible responses
 children[0].responses = ["Mom", "Dad", "friend", "other"];
 
-children[0].addChild(new Node("childAA", "Where were you with this person?"));
+children[0].addChild(new Node("Where were you with this person?"));
 
 // Point at child
 children = children[0].getChildren();
 
-// Add possible responses for childAA
+// Add possible responses
 children[0].responses = ["Home", "School", "Other"];
 
-children[0].addChild(new Node("childAA", "When did this happen?"));
+children[0].addChild(new Node("When did this happen?"));
 
 // Point at child
 children = children[0].getChildren();
 
-// Add possible responses for childAA
+// Add possible responses
 children[0].responses = ["Today", "Yesterday", "Earlier this week"];
 
-children[0].addChild(new Node("childAA", "At what time?"));
+children[0].addChild(new Node("At what time?"));
 
 // Point at child
 children = children[0].getChildren();
 
-// Add possible responses for childAA
+// Add possible responses
 children[0].responses = ["Morning", "Midday", "Evening"];
 
-children[0].addChild(new Node("childAA", "What was it about?"));
+children[0].addChild(new Node("What was it about?"));
 
 
+
+// Create an array to store the contents of our conversation
+var conversationArray = []
+
+// When the document is ready, do this:
 $( document ).ready(function() {
 
-    console.log("here we are");
-
-
-    // Begin with root
+    // Identify the root of our conversation tree
     var currentNode = root;
 
-    function initialize() {
-
-    }
-
+    // Update the chat bot dialogue to display the next question
     function updateBot(currentNode) {
 
         console.log("updatebot called");
@@ -108,9 +107,7 @@ $( document ).ready(function() {
         return
     }
 
-
-
-
+    // Update the response buttons to reflect the new question from the bot
     function updateResponses(currentNode) {
 
         // Clear previous response options
@@ -124,9 +121,12 @@ $( document ).ready(function() {
         }
     }
 
+    // Begin our conversation with initial calls to our update functions
     updateBot(currentNode);
     updateResponses(currentNode);
 
+    // Performed when user clicks on a response button
+    // Steps to the next question in the tree
     function iterate(currentNode) {
 
         children = currentNode.getChildren();
@@ -141,6 +141,7 @@ $( document ).ready(function() {
         }
     }
 
+    // When user clicks on a response, iterate down in the tree
     $( "#responses" ).click(function() {
         children = currentNode.getChildren();
         currentNode = children[0];
