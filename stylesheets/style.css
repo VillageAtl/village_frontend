@@ -171,13 +171,7 @@ body {
 /* 
 	For Ipads /  Desktops / Laptops
 */
-/* @media screen and (min-width: 700px) {
-    .img{
-		font-size: 1vw;
-		width:8%;
-		height:10%;
-	}
-}
+
 /*
 	Hide the Scroll Bar
 */
@@ -198,4 +192,16 @@ body {
     background-image: url('../images/thoughtBubble.png');
     background-size: 100% 100%;
     color: black;
+}
+
+@media screen and (max-width: 500px) and (min-width: 200px) {
+    #inverseProportional{
+        font-size: calc(10px);
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .guest-menu{
+        height: 550px;
+    }
 }
