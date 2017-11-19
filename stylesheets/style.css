@@ -210,3 +210,10 @@ html, body {
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
+
+#speechBubble{
+	background-image: url('../images/speechBubble.png');
+	background-size: 75% 200%;
+	background-position: 88%;
+	background-repeat: no-repeat;
+}
