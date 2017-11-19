@@ -2,7 +2,8 @@
 <html>
 
 <head>
-    <title>Village: Login Page</title>
+	<title>Village: Login Page</title>
+	<!-- Link different style sheets + javascript -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel='stylesheet' href='./stylesheets/style.css' />
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -22,10 +23,14 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="images/favicons.ico/favicon-16x16.png">
 	<link rel="manifest" href="images/favicons.ico/manifest.json">
 	<!-- End Favicon -->
+
 	<!-- Start Metatags -->
+
+	<!-- Favicon Meta Tags -->
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="images/favicons.ico/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
+	<!-- End Favicon Meta tags -->
 	<meta name="description" content=" The Companion Bot for your Child ">		
 	<meta name="keywords" content="village, villag, boys, boy, children, girl, child, girls, chat, bot, robot, chatbot, hackathon, goodienation, aasim, nathanial, alex, tai, audrey"/>
 	<!-- End Meta tags -->
@@ -49,9 +54,8 @@
 <body>
 	<div class = "page-wrapper">
     <div class="container">
-<div class="content">
-    <br>
-    <br>
+	<div class="content">
+    <br> <br>
     <div class="col-xs-offset-6 guest-menu">
         <div class="col-xs-12 box-content text-center">
 				<!-- login form -->
@@ -64,7 +68,7 @@
 			      <p class="left col-xs-4 message"><a href="#">Back to Guest</a></p>
 			    	<p class="right col-xs-offset-6 social-media"><a href="#">Login with Social Media</a></p>
 			    </form>
-			    <!-- guest form	 -->
+			    <!-- form everyone sees -->
 			    <form class="guest-form" method = "post" action="/search">
 			    	<h1 id = "guest">Welcome to Village!</h1>
 			      <div class = "row guest-2">
@@ -109,9 +113,12 @@
 </div>
 			
 	</div>
+
+
 	<script>
 		//pull login function
-		
+		//	Hides the items with class 'register-form' slowly 
+		//	Shows the login form
 		var pullLogin = () =>{
 			$('.register-form').hide("slow");
 			$('.guest-form').toggle(()=>{
@@ -125,6 +132,9 @@
 
 
 		//pull registration page function
+		//	Hides the items with class 'guest-form' slowly 
+		//	Hides the items with class 'register-form-2' slowly 
+		//	Shows the registering form (first one)
 		var pullRegistration = ()=>{
 			$('.guest-form').hide('slow');
 			$('.register-form-2').hide("slow");
@@ -133,7 +143,10 @@
 				console.log('produce register form');
 			});
 		};
-
+		//Pull second registration page
+		//	Hides the items with class 'guest-form' slowly 
+		//	Hides the items with class 'register-form' slowly 
+		//	Shows the registering form (second one)
 		var pullSecondRegistration = ()=>{
 			$('.register-form').hide('slow');
 			$('.guest-form').hide('slow');
@@ -144,6 +157,9 @@
 		};
 
 		//back to guest page
+		//	Hides the items with class 'register-form' slowly 
+		//	Hides the items with class 'register-form-2' slowly 
+		//	Shows the guest form (first one)
 		var toGuestPage = ()=>{
 			$('.register-form').hide("slow");
 			$('.register-form-2').hide("slow");
@@ -180,6 +196,8 @@
 			console.log('back to guest page');
 		})
 
+
+		//Prevents the user from scrolling.
 		var scrollEventHandler = function(){
   				window.scroll(0, window.pageYOffset)
 		}
