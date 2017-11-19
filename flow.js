@@ -88,8 +88,21 @@ $( document ).ready(function() {
         return
     }
 
+    // Clears the response bubbles
     function clearResponses() {
         $( "#responses" ).empty();
+    }
+
+    // Clears the kid's chat bubble of text
+    function clearKidBubble() {
+        $( "#kid span" ).empty();
+    }
+
+    // Update the kid message bubble
+    function updateKidBubble(text) {
+        // $( "#kid span" ).animate({width: 'toggle'}, "050");
+        $( "#kid span" ).text( text );
+        // $( "#kid span" ).animate({width: 'toggle'}, "slow");
     }
 
     // Update the response buttons to reflect the new question from the bot
@@ -120,7 +133,7 @@ $( document ).ready(function() {
 
     // Performed when user clicks on a response button
     // Steps to the next question in the tree
-    function iterate(currentNode) {
+    function iterate() {
 
         children = currentNode.getChildren();
 
@@ -152,17 +165,25 @@ $( document ).ready(function() {
     // When user clicks on a response, iterate down in the tree
     $( "#responses" ).click(function(e) {
 
+        // Grab the response that was chosen
+        var responseText = $(e.target).text();
+
+        // Make the selected response appear in the chat bubble
+        updateKidBubble( responseText );
+        setTimeout(clearKidBubble,600);
+
         // Log the question the user clicked in response to
         logChat("Bot: " + currentNode.getValue());
 
         // Add the user's response to the chat log
-        var clicked = $(e.target).text();
-        logChat("User: " + clicked);
+        logChat("User: " + responseText);
 
         // Move to the next node in the tree
         children = currentNode.getChildren();
         currentNode = children[0];
-        iterate(currentNode);
+        setTimeout(iterate,600);
+
+        
 
     });
 
