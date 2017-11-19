@@ -191,5 +191,12 @@ body {
         height: 550px;
     }
     }
+}
 */
+
+
+/*  */
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
 }
