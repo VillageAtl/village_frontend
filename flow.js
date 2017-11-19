@@ -79,9 +79,8 @@ $( document ).ready(function() {
     // Update the chat bot dialogue to display the next question
     function updateBot(currentNode) {
 
-        // Get info from currentNode:
+        // Get the bot's next question
         value = currentNode.getValue();
-        responses = currentNode.getResponses();
 
         // Update bot to current statement
         $( "#bot" ).text(value);
@@ -99,10 +98,18 @@ $( document ).ready(function() {
         // Clear previous response options
             clearResponses();
 
-        // Add a span for each response in responses array
+        // Grab the possible responses for this question
+        responses = currentNode.getResponses();
+
+        // HTML for the chat bubbles
+        var responseBubbleHTML = "<a href='#' id='chatBubbles'><div class='col-sm-4 text-center'> <p class='coloredBackground'></p> </div> "
+
+        // For each possible response, add a chat bubble then
+        // append the response to it
         var responseArrayLength = responses.length;
         for (var i = 0; i < responseArrayLength; i++) {
-            $( "#responses" ).append( "<a href='#' id='chatBubbles'><div class='col-sm-4 text-center'> <p class='coloredBackground'> <br>  " + responses[i] + "  <br> <br> </p> </div>" );
+            $( "#responses" ).append( responseBubbleHTML );
+            $( "#responses p" ).last().append( responses[i] );
 
         }
     }
@@ -122,8 +129,12 @@ $( document ).ready(function() {
             updateBot(currentNode);
             updateResponses(currentNode);
         }
-        else {
+        else { // We are at the end of the tree
+
+            // Update the bot's message bubble
             updateBot(currentNode);
+
+            // Clear the response buttons
             clearResponses();
 
             // Print the conversation log
@@ -144,10 +155,11 @@ $( document ).ready(function() {
         // Log the question the user clicked in response to
         logChat("Bot: " + currentNode.getValue());
 
-        // Log the response that was clicked
+        // Add the user's response to the chat log
         var clicked = $(e.target).text();
         logChat("User: " + clicked);
 
+        // Move to the next node in the tree
         children = currentNode.getChildren();
         currentNode = children[0];
         iterate(currentNode);
