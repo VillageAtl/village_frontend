@@ -205,8 +205,28 @@ body
 /*
 	Hide the Scroll Bar
 */
+
 html, body {
     max-width: 100%;
 	overflow-x: hidden;
 	overflow-y: hidden;
+}
+
+#speechBubble{
+	background-image: url('../images/speechBubble.png');
+	background-size: 75% 200%;
+	background-position: 88%;
+	background-repeat: no-repeat;
+}
+
+.coloredBackground{
+	background-image: url('../images/speechBubble.png');	
+	background-color: rgba(0, 80, 80, 0.43);
+	background-size: 100% 100%;
+	color: black;
+	
+}
+
+.coloredBackground :hover {
+	border: 1px solid rgb(0,80,80);
 }
